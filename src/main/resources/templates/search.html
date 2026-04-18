@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Petitions</title>
+    <style>body { font-family: sans-serif; margin: 40px; } .result { padding: 10px; border-bottom: 1px solid #eee; }</style>
+</head>
+<body>
+    <h1>Search Petitions</h1>
+    <form action="/search" method="get">
+        <input type="text" name="query" placeholder="Enter keyword..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div th:if="${results}">
+        <h2>Search Results</h2>
+        <p th:if="${results.isEmpty()}">No petitions found.</p>
+        <div th:each="p : ${results}" class="result">
+            <h3 th:text="${p.title}">Title</h3>
+            <a th:href="@{/view/{id}(id=${p.id})}">View Petition</a>
+        </div>
+    </div>
+    
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

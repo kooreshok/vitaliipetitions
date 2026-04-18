@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vitalii's Petitions</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        .petition-card { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>All Petitions</h1>
+    <a href="/create">Create New Petition</a>
+    <a href="/search">Search Petitions</a>
+    <hr>
+    
+    <div th:each="p : ${petitions}" class="petition-card">
+        <h2 th:text="${p.title}">Petition Title</h2>
+        <p th:text="${p.description}">Description goes here...</p>
+        <a th:href="@{/view/{id}(id=${p.id})}">View & Sign</a>
+    </div>
+</body>
+</html>

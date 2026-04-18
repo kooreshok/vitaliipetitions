@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Petition</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; line-height: 1.6; }
+        .box { border: 1px solid #ddd; padding: 20px; border-radius: 8px; background: #f9f9f9; }
+        .sig-list { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <a href="/">← Back to All Petitions</a>
+    <div class="box" th:if="${petition}">
+        <h1 th:text="${petition.title}">Title</h1>
+        <p th:text="${petition.description}">Description</p>
+        
+        <hr>
+        <h3>Sign this petition</h3>
+        <form th:action="@{/sign/{id}(id=${petition.id})}" th:object="${newSignature}" method="post">
+            <input type="text" th:field="*{name}" placeholder="Your Name" required>
+            <input type="email" th:field="*{email}" placeholder="Your Email" required>
+            <button type="submit">Sign Now</button>
+        </form>
+
+        <div class="sig-list">
+            <h4>Signatures (<span th:text="${petition.signatures.size()}">0</span>)</h4>
+            <ul>
+                <li th:each="sig : ${petition.signatures}">
+                    <span th:text="${sig.name}">Name</span> (<span th:text="${sig.email}">Email</span>)
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
