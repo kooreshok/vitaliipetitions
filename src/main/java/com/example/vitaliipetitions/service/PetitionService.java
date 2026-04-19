@@ -1,7 +1,7 @@
 package com.example.vitaliipetitions.service;
 
 import com.example.vitaliipetitions.model.Petition;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
